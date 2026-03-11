@@ -1,0 +1,55 @@
+'use server'
+
+import { supabaseAdmin } from '@/lib/supabase';
+
+export async function executeSpin(phoneNumber: string) {
+  // 1. Cek sisa spin user
+  const { data: user } = await supabaseAdmin
+    .from('thr_hunters')
+    .select('spins_left, total_prize')
+    .eq('phone_number', phoneNumber)
+    .single();
+
+  if (!user || user.spins_left <= 0) {
+    return { success: false, message: "Jatah spin Anda sudah habis!" };
+  }
+
+  // 2. RIGGED RNG (Algoritma Manipulasi)
+  // Anda bisa mengatur probabilitas di sini jika tidak ingin pure random.
+  // Saat ini menggunakan pure random dari array terbatas.
+  const riggedPrizes = [500, 1000, 1500];
+  const winAmount = riggedPrizes[Math.floor(Math.random() * riggedPrizes.length)];
+
+  const newTotalPrize = user.total_prize + winAmount;
+  const newSpinsLeft = user.spins_left - 1;
+
+  // 3. Update Database
+  const { error } = await supabaseAdmin
+    .from('thr_hunters')
+    .update({
+      total_prize: newTotalPrize,
+      spins_left: newSpinsLeft
+    })
+    .eq('phone_number', phoneNumber);
+
+  if (error) throw new Error(error.message);
+
+  // 4. Kembalikan data untuk dirender oleh Frontend
+  return {
+    success: true,
+    prize: winAmount,
+    current_total: newTotalPrize,
+    spins_left: newSpinsLeft
+  };
+}
+
+export async function getLeaderboard() {
+  const { data, error } = await supabaseAdmin
+    .from('thr_hunters')
+    .select('name, total_prize')
+    .order('total_prize', { ascending: false })
+    .limit(20);
+
+  if (error) throw new Error(error.message);
+  return data;
+}
