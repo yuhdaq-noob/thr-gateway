@@ -143,43 +143,82 @@ export function SpinSection({
             )}
 
             <div
-              className="relative h-full w-full overflow-hidden rounded-full border-8 border-slate-600 shadow-[0_0_36px_rgba(251,191,36,0.08)]"
+              className="relative h-full w-full"
               style={{
                 transform: `rotate(${rotationDegree}deg)`,
                 transition: "transform 5s cubic-bezier(0.2, 0.8, 0.1, 1)",
               }}
             >
-              {WHEEL_SEGMENTS.map((prize, index) => {
-                const rotateAngle = index * SEGMENT_DEGREE;
-                const bgColor =
-                  index % 2 === 0
-                    ? "bg-amber-400 text-slate-950"
-                    : "bg-slate-800 text-amber-200";
+              <svg
+                viewBox="0 0 400 400"
+                className="h-full w-full drop-shadow-[0_0_36px_rgba(251,191,36,0.1)]"
+              >
+                {/* Outer border ring */}
+                <circle cx="200" cy="200" r="196" fill="#475569" />
+                <circle cx="200" cy="200" r="190" fill="transparent" />
 
-                return (
-                  <div
-                    key={index}
-                    className={`absolute top-0 right-0 flex h-1/2 w-1/2 origin-bottom-left items-center justify-center border-l border-slate-600/30 ${bgColor}`}
-                    style={{
-                      transform: `rotate(${rotateAngle}deg) skewY(-45deg)`,
-                    }}
-                  >
-                    <span
-                      className="text-xs font-bold tracking-tight sm:text-sm md:text-base"
-                      style={{
-                        transform:
-                          "skewY(45deg) rotate(22.5deg) translateY(-40px)",
-                      }}
-                    >
-                      {prize >= 100000 ? `${prize / 1000}K` : prize}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+                {WHEEL_SEGMENTS.map((prize, index) => {
+                  const startAngle = index * SEGMENT_DEGREE - 90;
+                  const midAngle = startAngle + SEGMENT_DEGREE / 2;
+                  const startRad = (startAngle * Math.PI) / 180;
+                  const endRad =
+                    ((startAngle + SEGMENT_DEGREE) * Math.PI) / 180;
+                  const midRad = (midAngle * Math.PI) / 180;
 
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-              <div className="h-8 w-8 rounded-full border-4 border-amber-300 bg-slate-900 shadow-lg" />
+                  const r = 190;
+                  const cx = 200;
+                  const cy = 200;
+
+                  const x1 = (cx + r * Math.cos(startRad)).toFixed(3);
+                  const y1 = (cy + r * Math.sin(startRad)).toFixed(3);
+                  const x2 = (cx + r * Math.cos(endRad)).toFixed(3);
+                  const y2 = (cy + r * Math.sin(endRad)).toFixed(3);
+                  const pathD = `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2} Z`;
+
+                  const textR = r * 0.62;
+                  const tx = (cx + textR * Math.cos(midRad)).toFixed(3);
+                  const ty = (cy + textR * Math.sin(midRad)).toFixed(3);
+                  const textRotation = (midAngle + 90).toFixed(2);
+
+                  const fill = index % 2 === 0 ? "#fbbf24" : "#1e293b";
+                  const textFill = index % 2 === 0 ? "#0f172a" : "#fde68a";
+                  const label =
+                    prize >= 100000 ? `${prize / 1000}K` : `${prize}`;
+
+                  return (
+                    <g key={index}>
+                      <path
+                        d={pathD}
+                        fill={fill}
+                        stroke="#334155"
+                        strokeWidth="1.5"
+                      />
+                      <text
+                        x={tx}
+                        y={ty}
+                        fill={textFill}
+                        fontSize="20"
+                        fontWeight="bold"
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        transform={`rotate(${textRotation}, ${tx}, ${ty})`}
+                      >
+                        {label}
+                      </text>
+                    </g>
+                  );
+                })}
+
+                {/* Center hub */}
+                <circle
+                  cx="200"
+                  cy="200"
+                  r="18"
+                  fill="#0f172a"
+                  stroke="#fde68a"
+                  strokeWidth="4"
+                />
+              </svg>
             </div>
           </div>
         </div>
