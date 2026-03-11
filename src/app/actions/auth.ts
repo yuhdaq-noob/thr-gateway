@@ -3,7 +3,6 @@
 import { supabaseAdmin } from "@/lib/supabase";
 
 export async function loginUser(name: string, phoneNumber: string) {
-  // 1. Cek apakah nomor HP sudah terdaftar
   const { data: existingUser } = await supabaseAdmin
     .from("thr_hunters")
     .select("*")
@@ -18,7 +17,6 @@ export async function loginUser(name: string, phoneNumber: string) {
     };
   }
 
-  // 2. Jika belum terdaftar, cek limit 20 user
   const { count } = await supabaseAdmin
     .from("thr_hunters")
     .select("*", { count: "exact", head: true });
@@ -30,7 +28,6 @@ export async function loginUser(name: string, phoneNumber: string) {
     };
   }
 
-  // 3. Jika kuota masih ada, Insert user baru
   const { data: newUser, error } = await supabaseAdmin
     .from("thr_hunters")
     .insert([{ phone_number: phoneNumber, name: name }])

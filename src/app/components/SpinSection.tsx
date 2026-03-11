@@ -38,108 +38,152 @@ export function SpinSection({
   }, [spinResult]);
 
   return (
-    <section
-      id="spin"
-      className="pt-20 min-h-[70vh] flex flex-col items-center justify-center overflow-hidden"
-    >
-      <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold">
-          Halo, <span className="text-amber-400">{user.name}</span> \ud83d\udc4b
-        </h2>
-        <div className="mt-4 flex gap-4 justify-center">
-          <div className="bg-slate-800 border border-slate-700 rounded-xl px-5 py-3 min-w-[110px]">
-            <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">
-              Sisa Putaran
-            </p>
-            <p className="text-amber-400 font-bold text-2xl">
-              {user.spins_left}
-            </p>
-          </div>
-          <div className="bg-slate-800 border border-slate-700 rounded-xl px-5 py-3 min-w-[140px]">
-            <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">
-              Total THR
-            </p>
-            <p className="text-green-400 font-bold text-xl">
-              Rp {user.total_prize.toLocaleString("id-ID")}
-            </p>
-          </div>
-        </div>
-      </div>
+    <section id="spin" className="pt-12 overflow-hidden md:pt-16">
+      <div className="relative rounded-[2rem] border border-slate-800/90 bg-[radial-gradient(circle_at_top,_rgba(251,191,36,0.08),_transparent_35%),linear-gradient(180deg,rgba(15,23,42,0.98),rgba(2,6,23,0.96))] p-6 shadow-[0_20px_80px_rgba(2,6,23,0.42)] md:p-8">
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_26rem]">
+          <div>
+            <div className="inline-flex items-center rounded-full border border-amber-400/15 bg-amber-400/8 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-amber-200">
+              Portal Hadiah Lebaran
+            </div>
 
-      <div className="relative w-72 h-72 md:w-96 md:h-96">
-        {/* Pointer arrow */}
-        <div className="absolute top-[-16px] left-1/2 -translate-x-1/2 z-10">
-          <div className="w-0 h-0 border-l-[14px] border-r-[14px] border-t-[28px] border-l-transparent border-r-transparent border-t-red-500 filter drop-shadow-lg" />
-        </div>
+            <div className="mt-5 max-w-xl">
+              <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+                Halo, <span className="text-amber-400">{user.name}</span>.
+              </h2>
+              <p className="mt-3 text-sm leading-6 text-slate-300 md:text-base">
+                Gunakan kesempatan putaran Anda untuk mendapatkan hadiah THR,
+                lalu pantau total hadiah dan status pencairannya di satu tempat.
+              </p>
+            </div>
 
-        {/* Spinning glow ring */}
-        {isSpinning && (
-          <div className="absolute inset-0 rounded-full animate-pulse ring-4 ring-amber-400/50 bg-amber-400/5" />
-        )}
-
-        <div
-          className="w-full h-full rounded-full border-8 border-slate-600 shadow-[0_0_60px_rgba(251,191,36,0.2)] overflow-hidden relative"
-          style={{
-            transform: `rotate(${rotationDegree}deg)`,
-            transition: "transform 5s cubic-bezier(0.2, 0.8, 0.1, 1)",
-          }}
-        >
-          {WHEEL_SEGMENTS.map((prize, index) => {
-            const rotateAngle = index * SEGMENT_DEGREE;
-            const bgColor =
-              index % 2 === 0
-                ? "bg-amber-400 text-slate-900"
-                : "bg-slate-800 text-amber-400";
-
-            return (
-              <div
-                key={index}
-                className={`absolute top-0 right-0 w-1/2 h-1/2 origin-bottom-left flex items-center justify-center border-l border-slate-600/30 ${bgColor}`}
-                style={{
-                  transform: `rotate(${rotateAngle}deg) skewY(-45deg)`,
-                }}
-              >
-                <span
-                  className="font-bold text-sm md:text-base"
-                  style={{
-                    transform: "skewY(45deg) rotate(22.5deg) translateY(-40px)",
-                  }}
-                >
-                  {prize >= 100000 ? `${prize / 1000}K` : prize}
-                </span>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              <div className="rounded-2xl border border-slate-700/80 bg-slate-900/70 px-5 py-4 shadow-inner shadow-slate-950/30">
+                <p className="text-sm font-medium text-slate-400">
+                  Sisa putaran
+                </p>
+                <p className="mt-2 text-3xl font-bold text-amber-300">
+                  {user.spins_left}
+                </p>
+                <p className="mt-1 text-xs leading-5 text-slate-400">
+                  Kesempatan aktif yang masih bisa digunakan hari ini.
+                </p>
               </div>
-            );
-          })}
-        </div>
+              <div className="rounded-2xl border border-slate-700/80 bg-slate-900/70 px-5 py-4 shadow-inner shadow-slate-950/30">
+                <p className="text-sm font-medium text-slate-400">
+                  Total hadiah
+                </p>
+                <p className="mt-2 text-3xl font-bold text-emerald-300">
+                  Rp {user.total_prize.toLocaleString("id-ID")}
+                </p>
+                <p className="mt-1 text-xs leading-5 text-slate-400">
+                  Akumulasi hadiah yang sudah Anda kumpulkan.
+                </p>
+              </div>
+            </div>
 
-        {/* Center hub */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-8 h-8 rounded-full bg-slate-900 border-4 border-amber-400 shadow-lg" />
+            <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-950/55 p-4 text-sm text-slate-300">
+              <p className="font-semibold text-slate-100">Cara bermain</p>
+              <p className="mt-2 leading-6 text-slate-300">
+                Tekan tombol putar untuk mengambil hadiah secara acak. Hasil
+                putaran akan langsung menambah total hadiah Anda dan klasemen
+                diperbarui otomatis.
+              </p>
+            </div>
+
+            <div className="mt-8 flex flex-col items-start gap-4">
+              <button
+                onClick={onSpin}
+                disabled={isSpinning || user.spins_left <= 0}
+                className="w-full rounded-full bg-gradient-to-r from-amber-400 to-orange-400 px-8 py-4 text-base font-extrabold text-slate-950 shadow-[0_14px_32px_rgba(249,115,22,0.22)] transition-all hover:from-amber-300 hover:to-orange-300 hover:shadow-[0_16px_36px_rgba(249,115,22,0.26)] active:scale-[0.99] disabled:cursor-not-allowed disabled:from-slate-700 disabled:to-slate-700 disabled:text-slate-400 disabled:shadow-none sm:w-auto"
+              >
+                {isSpinning
+                  ? "Sedang Memutar..."
+                  : user.spins_left > 0
+                    ? "Putar Sekarang"
+                    : "Kesempatan Sudah Habis"}
+              </button>
+
+              <p className="text-sm leading-6 text-slate-400">
+                {isSpinning
+                  ? "Putaran sedang diproses. Mohon tunggu hingga roda berhenti."
+                  : user.spins_left > 0
+                    ? "Setiap hasil putaran akan langsung menambah total hadiah dan memperbarui klasemen."
+                    : "Semua kesempatan aktif sudah digunakan. Pantau hasil akhir dan jadwal pencairan di bawah."}
+              </p>
+
+              {spinResult !== null && (
+                <div
+                  aria-live="polite"
+                  className="w-full rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-4 text-left shadow-lg shadow-emerald-950/10"
+                >
+                  <p className="text-sm font-semibold text-emerald-300">
+                    Hasil putaran terbaru
+                  </p>
+                  <p className="mt-1 text-2xl font-bold text-white">
+                    Rp {spinResult.toLocaleString("id-ID")}
+                  </p>
+                  <p className="mt-1 text-sm text-slate-300">
+                    Nilai hadiah sudah otomatis ditambahkan ke total hadiah
+                    Anda.
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="relative mx-auto h-72 w-72 md:h-96 md:w-96">
+            <div className="absolute inset-8 rounded-full bg-amber-400/8 blur-3xl" />
+
+            <div className="absolute top-[-16px] left-1/2 z-10 -translate-x-1/2">
+              <div className="h-0 w-0 border-l-[13px] border-r-[13px] border-t-[24px] border-l-transparent border-r-transparent border-t-rose-400 drop-shadow-md" />
+            </div>
+
+            {isSpinning && (
+              <div className="absolute inset-0 animate-pulse rounded-full bg-amber-400/4 ring-4 ring-amber-400/28" />
+            )}
+
+            <div
+              className="relative h-full w-full overflow-hidden rounded-full border-8 border-slate-600 shadow-[0_0_36px_rgba(251,191,36,0.08)]"
+              style={{
+                transform: `rotate(${rotationDegree}deg)`,
+                transition: "transform 5s cubic-bezier(0.2, 0.8, 0.1, 1)",
+              }}
+            >
+              {WHEEL_SEGMENTS.map((prize, index) => {
+                const rotateAngle = index * SEGMENT_DEGREE;
+                const bgColor =
+                  index % 2 === 0
+                    ? "bg-amber-400 text-slate-950"
+                    : "bg-slate-800 text-amber-200";
+
+                return (
+                  <div
+                    key={index}
+                    className={`absolute top-0 right-0 flex h-1/2 w-1/2 origin-bottom-left items-center justify-center border-l border-slate-600/30 ${bgColor}`}
+                    style={{
+                      transform: `rotate(${rotateAngle}deg) skewY(-45deg)`,
+                    }}
+                  >
+                    <span
+                      className="text-xs font-bold tracking-tight sm:text-sm md:text-base"
+                      style={{
+                        transform:
+                          "skewY(45deg) rotate(22.5deg) translateY(-40px)",
+                      }}
+                    >
+                      {prize >= 100000 ? `${prize / 1000}K` : prize}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+              <div className="h-8 w-8 rounded-full border-4 border-amber-300 bg-slate-900 shadow-lg" />
+            </div>
+          </div>
         </div>
       </div>
-
-      <button
-        onClick={onSpin}
-        disabled={isSpinning || user.spins_left <= 0}
-        className="mt-12 px-10 py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 disabled:from-slate-700 disabled:to-slate-700 disabled:text-slate-500 disabled:shadow-none text-slate-900 font-extrabold text-lg rounded-full shadow-[0_0_30px_rgba(245,158,11,0.5)] hover:shadow-[0_0_40px_rgba(245,158,11,0.7)] active:scale-95 transition-all"
-      >
-        {isSpinning
-          ? "\u23f3 MEMUTAR..."
-          : user.spins_left > 0
-            ? "\ud83c\udfb0 SPIN SEKARANG"
-            : "\u274c JATAH HABIS"}
-      </button>
-
-      {spinResult !== null && (
-        <div className="mt-6 px-8 py-4 bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/60 rounded-xl font-bold text-base shadow-lg shadow-green-500/10 animate-pulse text-center">
-          <span className="text-green-300">
-            \ud83c\udf89 Selamat! Anda mendapatkan{" "}
-          </span>
-          <span className="text-white text-lg">
-            Rp {spinResult.toLocaleString("id-ID")}
-          </span>
-        </div>
-      )}
     </section>
   );
 }

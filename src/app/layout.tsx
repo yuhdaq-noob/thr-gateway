@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import "./global.css";
 
 export const metadata: Metadata = {
-  title: "THR Gateway",
-  description: "Gateway permainan spin THR berbasis Next.js dan Supabase.",
+  title: "THR Gateway | Portal Hadiah Lebaran",
+  description:
+    "Portal hadiah Lebaran dengan sistem putaran THR dan pencairan terjadwal.",
 };
 
 export default function RootLayout({

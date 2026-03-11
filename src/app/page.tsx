@@ -14,6 +14,7 @@ import type { LeaderboardEntry, ThrUser } from "./types/game";
 export default function GameGateway() {
   const [user, setUser] = useState<ThrUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
   const [rotationDegree, setRotationDegree] = useState(0);
   const [spinResult, setSpinResult] = useState<number | null>(null);
@@ -82,7 +83,7 @@ export default function GameGateway() {
   const handleLogin = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
-      setIsLoading(true);
+      setIsAuthenticating(true);
       setLoginError("");
 
       try {
@@ -100,7 +101,7 @@ export default function GameGateway() {
         console.error(error);
         setLoginError("Terjadi kesalahan sistem. Coba lagi.");
       } finally {
-        setIsLoading(false);
+        setIsAuthenticating(false);
       }
     },
     [fetchLeaderboard, inputName, inputPhone],
@@ -137,9 +138,11 @@ export default function GameGateway() {
   if (isLoading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-slate-400">
-        <div className="text-4xl mb-4 animate-spin select-none">🎰</div>
+        <div className="mb-4 flex h-14 w-14 animate-pulse items-center justify-center rounded-2xl border border-amber-400/15 bg-amber-400/10">
+          <span className="h-3 w-3 rounded-sm bg-gradient-to-br from-amber-300 to-orange-400" />
+        </div>
         <p className="text-sm font-semibold tracking-widest uppercase">
-          Memuat Sistem...
+          Menyiapkan Portal Hadiah...
         </p>
       </div>
     );
@@ -150,6 +153,7 @@ export default function GameGateway() {
       <LoginForm
         inputName={inputName}
         inputPhone={inputPhone}
+        isSubmitting={isAuthenticating}
         loginError={loginError}
         onNameChange={setInputName}
         onPhoneChange={setInputPhone}
@@ -162,7 +166,7 @@ export default function GameGateway() {
     <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100 font-sans scroll-smooth">
       <GameHeader />
 
-      <main className="max-w-4xl mx-auto p-4 space-y-24 pb-24">
+      <main className="max-w-5xl mx-auto px-4 py-6 space-y-20 pb-24 md:px-6">
         <SpinSection
           user={user}
           rotationDegree={rotationDegree}

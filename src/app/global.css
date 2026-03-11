@@ -1,43 +1,83 @@
-/* 1. Inisialisasi Tailwind CSS */
-/* Jika Next.js Anda menggunakan Tailwind v4, gunakan: */
 @import "tailwindcss";
 
-/* Jika masih menggunakan Tailwind v3 (versi legacy fallback), un-comment 3 baris di bawah ini dan hapus baris di atas: */
-/* @tailwind base; */
-/* @tailwind components; */
-/* @tailwind utilities; */
+:root {
+  color-scheme: dark;
+  --bg-primary: #020617;
+  --bg-secondary: #0f172a;
+  --surface-soft: rgba(15, 23, 42, 0.72);
+  --surface-strong: rgba(15, 23, 42, 0.92);
+  --border-soft: rgba(148, 163, 184, 0.14);
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --accent-primary: #fbbf24;
+  --accent-secondary: #fb923c;
+  --success: #34d399;
+}
 
-/* 2. Modifikasi Root Element */
 @layer base {
   html {
-    /* Esensial untuk navigasi Anchor (SPA) agar tidak lompat secara kasar */
     scroll-behavior: smooth;
   }
 
   body {
-    /* Warna fallback jika Tailwind gagal merender sementara, mencegah white-flash */
-    background-color: #0f172a; /* Setara bg-slate-900 */
-    color: #f1f5f9; /* Setara text-slate-100 */
+    background:
+      radial-gradient(circle at top, rgba(251, 191, 36, 0.08), transparent 28%),
+      linear-gradient(180deg, var(--bg-secondary), var(--bg-primary));
+    color: #f1f5f9;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  * {
+    border-color: var(--border-soft);
+  }
+
+  ::selection {
+    background: rgba(251, 191, 36, 0.28);
+    color: #fff7ed;
+  }
 }
 
-/* 3. Estetika Scrollbar (Micro-interaction tambahan) */
-/* Karena ini SPA vertikal, scrollbar standar bawaan browser akan terlihat jelek. Kita timpa gayanya. */
+a,
+button,
+input {
+  transition-property:
+    color, background-color, border-color, box-shadow, transform, opacity;
+  transition-duration: 180ms;
+  transition-timing-function: ease;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1e293b; /* Warna track bg-slate-800 */
+  background: #1e293b;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #91aa9c; /* Warna thumb bg-amber-500 */
+  background: #64748b;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #d97706; /* Warna hover bg-amber-600 */
+  background: #f59e0b;
 }
