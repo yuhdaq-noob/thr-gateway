@@ -1,0 +1,43 @@
+/* 1. Inisialisasi Tailwind CSS */
+/* Jika Next.js Anda menggunakan Tailwind v4, gunakan: */
+@import "tailwindcss";
+
+/* Jika masih menggunakan Tailwind v3 (versi legacy fallback), un-comment 3 baris di bawah ini dan hapus baris di atas: */
+/* @tailwind base; */
+/* @tailwind components; */
+/* @tailwind utilities; */
+
+/* 2. Modifikasi Root Element */
+@layer base {
+  html {
+    /* Esensial untuk navigasi Anchor (SPA) agar tidak lompat secara kasar */
+    scroll-behavior: smooth;
+  }
+
+  body {
+    /* Warna fallback jika Tailwind gagal merender sementara, mencegah white-flash */
+    background-color: #0f172a; /* Setara bg-slate-900 */
+    color: #f1f5f9; /* Setara text-slate-100 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* 3. Estetika Scrollbar (Micro-interaction tambahan) */
+/* Karena ini SPA vertikal, scrollbar standar bawaan browser akan terlihat jelek. Kita timpa gayanya. */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e293b; /* Warna track bg-slate-800 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #91aa9c; /* Warna thumb bg-amber-500 */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d97706; /* Warna hover bg-amber-600 */
+}

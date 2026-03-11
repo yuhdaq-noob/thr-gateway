@@ -136,8 +136,11 @@ export default function GameGateway() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white font-mono">
-        Memuat Sistem...
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-slate-400">
+        <div className="text-4xl mb-4 animate-spin select-none">🎰</div>
+        <p className="text-sm font-semibold tracking-widest uppercase">
+          Memuat Sistem...
+        </p>
       </div>
     );
   }
@@ -156,7 +159,7 @@ export default function GameGateway() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100 font-sans scroll-smooth">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100 font-sans scroll-smooth">
       <GameHeader />
 
       <main className="max-w-4xl mx-auto p-4 space-y-24 pb-24">
