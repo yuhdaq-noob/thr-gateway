@@ -4,7 +4,7 @@ import "./global.css";
 export const metadata: Metadata = {
   title: "THR Gateway | Portal Hadiah Lebaran",
   description:
-    "Portal hadiah Lebaran dengan sistem putaran THR dan pencairan terjadwal.",
+    "Portal THR dan pencairan terjadwal.",
 };
 
 export default function RootLayout({

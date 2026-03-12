@@ -1,17 +1,20 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { loginUser } from "./actions/auth";
 import { executeSpin, getLeaderboard } from "./actions/game";
 import { GameHeader } from "./components/GameHeader";
 import { InfoSection } from "./components/InfoSection";
 import { LeaderboardSection } from "./components/LeaderboardSection";
 import { LoginForm } from "./components/LoginForm";
+import { SectionReveal } from "./components/SectionReveal";
 import { SpinSection } from "./components/SpinSection";
+import { WelcomeHero } from "./components/WelcomeHero";
 import { SPIN_ANIMATION_MS, calculateSpinDegree } from "./lib/spin";
 import type { LeaderboardEntry, ThrUser } from "./types/game";
 
 export default function GameGateway() {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [user, setUser] = useState<ThrUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
@@ -19,6 +22,9 @@ export default function GameGateway() {
   const [rotationDegree, setRotationDegree] = useState(0);
   const [spinResult, setSpinResult] = useState<number | null>(null);
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [musicPlayRequest, setMusicPlayRequest] = useState(0);
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+  const [musicNotice, setMusicNotice] = useState("");
 
   const [inputName, setInputName] = useState("");
   const [inputPhone, setInputPhone] = useState("");
@@ -32,6 +38,44 @@ export default function GameGateway() {
       console.error("Gagal memuat klasemen", error);
     }
   }, []);
+
+  const playRamadhanMusic = useCallback(async () => {
+    const audio = audioRef.current;
+
+    if (!audio) return;
+
+    audio.volume = 0.55;
+    audio.loop = true;
+
+    try {
+      await audio.play();
+      setIsMusicPlaying(true);
+      setMusicNotice("");
+    } catch (error) {
+      console.error("Gagal memutar audio Ramadhan", error);
+      setIsMusicPlaying(false);
+      setMusicNotice("Browser memerlukan klik untuk memulai lagu Ramadhan.");
+    }
+  }, []);
+
+  const pauseRamadhanMusic = useCallback(() => {
+    const audio = audioRef.current;
+
+    if (!audio) return;
+
+    audio.pause();
+    setIsMusicPlaying(false);
+    setMusicNotice("");
+  }, []);
+
+  const toggleRamadhanMusic = useCallback(async () => {
+    if (isMusicPlaying) {
+      pauseRamadhanMusic();
+      return;
+    }
+
+    await playRamadhanMusic();
+  }, [isMusicPlaying, pauseRamadhanMusic, playRamadhanMusic]);
 
   const handleSpin = useCallback(async () => {
     if (isSpinning || !user || user.spins_left <= 0) return;
@@ -93,6 +137,7 @@ export default function GameGateway() {
           localStorage.setItem("thr_user_phone", res.user.phone_number);
           localStorage.setItem("thr_user_name", res.user.name);
           setUser(res.user as ThrUser);
+          setMusicPlayRequest((prev) => prev + 1);
           fetchLeaderboard();
         } else {
           setLoginError(res.message);
@@ -135,6 +180,29 @@ export default function GameGateway() {
     };
   }, [fetchLeaderboard]);
 
+  useEffect(() => {
+    const audio = audioRef.current;
+
+    if (!audio) return;
+
+    const handlePlay = () => setIsMusicPlaying(true);
+    const handlePause = () => setIsMusicPlaying(false);
+
+    audio.addEventListener("play", handlePlay);
+    audio.addEventListener("pause", handlePause);
+
+    return () => {
+      audio.removeEventListener("play", handlePlay);
+      audio.removeEventListener("pause", handlePause);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!user || musicPlayRequest === 0) return;
+
+    void playRamadhanMusic();
+  }, [musicPlayRequest, playRamadhanMusic, user]);
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-slate-400">
@@ -163,19 +231,34 @@ export default function GameGateway() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100 font-sans scroll-smooth">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 font-sans text-slate-100 scroll-smooth">
+      <audio ref={audioRef} src="/ramadhan-sound.ogg" preload="auto" />
       <GameHeader />
 
-      <main className="max-w-5xl mx-auto px-4 py-6 space-y-20 pb-24 md:px-6">
-        <SpinSection
-          user={user}
-          rotationDegree={rotationDegree}
-          isSpinning={isSpinning}
-          spinResult={spinResult}
-          onSpin={handleSpin}
-        />
-        <LeaderboardSection leaderboard={leaderboard} />
-        <InfoSection />
+      <main className="mx-auto max-w-5xl space-y-16 px-4 py-6 pb-20 md:px-6">
+        <SectionReveal>
+          <WelcomeHero
+            user={user}
+            isMusicPlaying={isMusicPlaying}
+            musicNotice={musicNotice}
+            onToggleMusic={toggleRamadhanMusic}
+          />
+        </SectionReveal>
+        <SectionReveal>
+          <SpinSection
+            user={user}
+            rotationDegree={rotationDegree}
+            isSpinning={isSpinning}
+            spinResult={spinResult}
+            onSpin={handleSpin}
+          />
+        </SectionReveal>
+        <SectionReveal>
+          <LeaderboardSection leaderboard={leaderboard} />
+        </SectionReveal>
+        <SectionReveal>
+          <InfoSection />
+        </SectionReveal>
       </main>
     </div>
   );

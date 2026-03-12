@@ -8,43 +8,38 @@ const RANK_LABELS = ["01", "02", "03"];
 
 export function LeaderboardSection({ leaderboard }: LeaderboardSectionProps) {
   return (
-    <section id="klasemen" className="pt-8 md:pt-10">
-      <div className="mb-8 max-w-2xl">
+    <section
+      id="klasemen"
+      className="scroll-mt-36 pt-8 sm:scroll-mt-28 md:pt-10"
+    >
+      <div className="mb-7 max-w-2xl">
         <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-200">
           Klasemen
         </p>
-        <h3 className="mt-3 text-3xl font-bold tracking-tight text-white">
+        <h3 className="mt-3 text-3xl font-bold tracking-tight text-slate-100">
           Peringkat hadiah peserta
         </h3>
-        <p className="mt-3 text-sm leading-6 text-slate-400">
-          Daftar ini diperbarui otomatis setelah putaran berhasil. Tiga peserta
-          teratas mendapat sorotan utama untuk memudahkan pemantauan.
-        </p>
-        <div className="mt-4 inline-flex items-center rounded-full border border-slate-800 bg-slate-900/70 px-3 py-1 text-xs font-medium text-slate-400">
-          Diperbarui otomatis setelah putaran berhasil
-        </div>
       </div>
 
-      <div className="rounded-[1.75rem] border border-slate-800 bg-slate-900/65 p-6 shadow-[0_18px_50px_rgba(2,6,23,0.28)]">
+      <div className="rounded-3xl border border-slate-800 bg-slate-900/65 p-6">
         {leaderboard.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-slate-700 bg-slate-950/40 px-6 py-10 text-center text-slate-400">
-            Belum ada peserta yang tercatat di klasemen. Hasil putaran pertama
-            akan langsung muncul di sini.
+            Belum ada peserta yang tercatat di klasemen.
           </div>
         ) : (
           <ul className="space-y-3">
             {leaderboard.map((player, idx) => (
               <li
                 key={idx}
-                className={`flex items-center justify-between rounded-2xl border px-4 py-4 transition-colors
+                className={`flex items-center justify-between rounded-2xl border px-4 py-4
                   ${
                     idx === 0
-                      ? "border-amber-500/40 bg-amber-500/10 shadow-sm shadow-amber-500/10"
+                      ? "border-amber-500/40 bg-amber-500/10"
                       : idx === 1
                         ? "border-slate-500/40 bg-slate-400/10"
                         : idx === 2
                           ? "border-orange-700/40 bg-orange-700/10"
-                          : "border-slate-700/50 bg-slate-800/60 hover:border-amber-500/20"
+                          : "border-slate-700/50 bg-slate-800/60"
                   }`}
               >
                 <span className="flex items-center gap-3 font-semibold">
@@ -54,7 +49,7 @@ export function LeaderboardSection({ leaderboard }: LeaderboardSectionProps) {
                         {RANK_LABELS[idx]}
                       </span>
                     ) : (
-                      <span className="text-slate-600 text-sm font-mono">
+                      <span className="text-sm font-mono text-slate-600">
                         #{idx + 1}
                       </span>
                     )}
