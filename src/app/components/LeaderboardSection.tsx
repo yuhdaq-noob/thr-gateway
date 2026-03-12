@@ -10,20 +10,17 @@ export function LeaderboardSection({ leaderboard }: LeaderboardSectionProps) {
   return (
     <section
       id="klasemen"
-      className="scroll-mt-36 pt-8 sm:scroll-mt-28 md:pt-10"
+      className="scroll-mt-28 pt-8 sm:scroll-mt-24 md:pt-10"
     >
       <div className="mb-7 max-w-2xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-200">
-          Klasemen
-        </p>
         <h3 className="mt-3 text-3xl font-bold tracking-tight text-slate-100">
-          Peringkat hadiah peserta
+          Top Global THR 👑
         </h3>
       </div>
 
-      <div className="rounded-3xl border border-slate-800 bg-slate-900/65 p-6">
+      <div className="rounded-3xl border border-slate-800/80 bg-slate-900/70 p-6 shadow-[0_18px_40px_rgba(2,6,23,0.45)]">
         {leaderboard.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-slate-700 bg-slate-950/40 px-6 py-10 text-center text-slate-400">
+          <div className="rounded-2xl border border-dashed border-slate-700/70 bg-slate-950/50 px-6 py-10 text-center text-slate-300">
             Belum ada peserta yang tercatat di klasemen.
           </div>
         ) : (
@@ -39,7 +36,7 @@ export function LeaderboardSection({ leaderboard }: LeaderboardSectionProps) {
                         ? "border-slate-500/40 bg-slate-400/10"
                         : idx === 2
                           ? "border-orange-700/40 bg-orange-700/10"
-                          : "border-slate-700/50 bg-slate-800/60"
+                          : "border-slate-700/60 bg-slate-800/55"
                   }`}
               >
                 <span className="flex items-center gap-3 font-semibold">
@@ -49,7 +46,7 @@ export function LeaderboardSection({ leaderboard }: LeaderboardSectionProps) {
                         {RANK_LABELS[idx]}
                       </span>
                     ) : (
-                      <span className="text-sm font-mono text-slate-600">
+                      <span className="text-sm font-mono text-slate-500">
                         #{idx + 1}
                       </span>
                     )}
@@ -62,7 +59,7 @@ export function LeaderboardSection({ leaderboard }: LeaderboardSectionProps) {
                     >
                       {player.name}
                     </span>
-                    <span className="mt-0.5 block text-xs font-normal text-slate-500">
+                    <span className="mt-0.5 block text-xs font-normal text-slate-400">
                       Peserta #{idx + 1}
                     </span>
                   </span>

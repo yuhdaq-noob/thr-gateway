@@ -9,25 +9,25 @@ const SPONSORS = [
     src: "/janda-removebg-preview.png",
     alt: "Logo sponsor Janda",
     width: 140,
-    height: 64,
+    height: 100,
   },
   {
     src: "/nisacake.png",
     alt: "Logo sponsor Nisa Cake",
     width: 140,
-    height: 64,
+    height: 100,
   },
   {
     src: "/sambung-removebg-preview.png",
     alt: "Logo sponsor Sambung",
     width: 140,
-    height: 64,
+    height: 100,
   },
   {
     src: "/PDI-removebg-preview.png",
     alt: "Logo sponsor PDI",
     width: 140,
-    height: 64,
+    height: 100,
   },
 ] as const;
 
@@ -47,16 +47,23 @@ export function WelcomeHero({
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section id="sambutan" className="scroll-mt-30 sm:scroll-mt-20">
+    <section id="sambutan" className="scroll-mt-28 sm:scroll-mt-24">
       <div className="relative overflow-hidden rounded-[2rem] border border-slate-800 bg-[radial-gradient(circle_at_top,rgba(251,191,36,0.14),transparent_34%),linear-gradient(180deg,rgba(15,23,42,0.9),rgba(2,6,23,0.96))] p-6 md:p-8">
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-300/40 to-transparent" />
         <div className="absolute -top-20 right-[-4rem] h-56 w-56 rounded-full bg-amber-400/10 blur-3xl" />
 
         <div className="grid gap-2 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-center">
           <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
+            initial={
+              shouldReduceMotion ? false : { opacity: 0, y: 30, scale: 0.98 }
+            }
             animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, ease: [0.2, 0.8, 0.2, 1] }}
+            transition={{
+              type: "spring",
+              stiffness: 95,
+              damping: 17,
+              mass: 0.85,
+            }}
           >
             <div className="mt-5 max-w-2xl">
               <Image
@@ -67,7 +74,7 @@ export function WelcomeHero({
                 className="mb-5 h-20 w-auto object-contain md:h-24"
                 priority
               />
-              <p className="text-sm font-medium text-slate-400">
+              <p className="text-sm font-medium text-slate-300">
                 Selamat datang, {user.name}
               </p>
               <h1 className="mt-3 max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-slate-50 md:text-5xl md:leading-[1.05]">
@@ -76,29 +83,43 @@ export function WelcomeHero({
             </div>
 
             <div className="mt-7 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-              <a
+              <motion.a
                 href="#spin"
-                className="rounded-full bg-amber-300 px-6 py-3 text-sm font-semibold text-slate-950 hover:bg-amber-200"
+                className="rounded-full bg-gradient-to-r from-amber-300 via-amber-200 to-yellow-200 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_12px_24px_rgba(251,191,36,0.35)] hover:from-amber-200 hover:via-amber-100 hover:to-yellow-100 hover:shadow-[0_16px_30px_rgba(251,191,36,0.45)] active:translate-y-0.5"
+                whileHover={
+                  shouldReduceMotion ? undefined : { y: -2, scale: 1.02 }
+                }
+                whileTap={
+                  shouldReduceMotion ? undefined : { y: 0, scale: 0.98 }
+                }
+                transition={{ type: "spring", stiffness: 280, damping: 18 }}
               >
                 Ambil THR
-              </a>
+              </motion.a>
 
-              <button
+              <motion.button
                 type="button"
                 onClick={() => void onToggleMusic()}
-                className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/70 px-5 py-3 text-sm font-medium text-slate-200 hover:border-amber-400/30 hover:text-slate-50"
+                className="inline-flex items-center gap-2 rounded-full border border-slate-700/80 bg-slate-900/70 px-5 py-3 text-sm font-medium text-slate-200 shadow-[0_10px_22px_rgba(2,6,23,0.35)] hover:border-amber-400/40 hover:bg-slate-800/70 hover:text-slate-50 hover:shadow-[0_12px_24px_rgba(2,6,23,0.45)] active:translate-y-0.5"
+                whileHover={
+                  shouldReduceMotion ? undefined : { y: -1.5, scale: 1.01 }
+                }
+                whileTap={
+                  shouldReduceMotion ? undefined : { y: 0, scale: 0.98 }
+                }
+                transition={{ type: "spring", stiffness: 280, damping: 20 }}
               >
                 <span
                   className={`h-2 w-2 rounded-full ${
                     isMusicPlaying ? "bg-emerald-300" : "bg-slate-500"
                   }`}
                 />
-                {isMusicPlaying ? "Matikan Lagu" : "Putar Lagu Ramadhan"}
-              </button>
+                {isMusicPlaying ? "Matikan Musik" : "Putar Musik"}
+              </motion.button>
             </div>
 
             {musicNotice && (
-              <p className="mt-3 text-sm leading-6 text-slate-400">
+              <p className="mt-3 text-sm leading-6 text-slate-300">
                 {musicNotice}
               </p>
             )}
@@ -106,18 +127,21 @@ export function WelcomeHero({
 
           <motion.div
             className="relative mx-auto w-full max-w-[17rem]"
-            initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.94 }}
+            initial={
+              shouldReduceMotion ? false : { opacity: 0, scale: 0.88, y: 18 }
+            }
             animate={shouldReduceMotion ? undefined : { opacity: 1, scale: 1 }}
             transition={{
-              duration: 0.6,
+              type: "spring",
+              stiffness: 100,
+              damping: 16,
               delay: 0.08,
-              ease: [0.2, 0.8, 0.2, 1],
             }}
           ></motion.div>
         </div>
 
-        <div className="mt-2 rounded-[1.75rem] border border-slate-800 bg-slate-950/45 p-4 md:p-5">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-slate-500">
+        <div className="mt-2 rounded-[1.75rem] border border-slate-800/80 bg-slate-950/60 p-4 shadow-[0_20px_40px_rgba(2,6,23,0.45)] md:p-5">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-amber-200">
             Sponsored by
           </p>
 
@@ -125,21 +149,30 @@ export function WelcomeHero({
             {SPONSORS.map((sponsor, index) => (
               <motion.div
                 key={sponsor.src}
-                className="flex min-h-20 items-center justify-center rounded-2xl border border-slate-800 bg-slate-900/65 px-4 py-3"
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
+                className="group relative flex min-h-20 items-center justify-center overflow-hidden rounded-2xl border border-slate-800/80 bg-[linear-gradient(180deg,rgba(15,23,42,0.82),rgba(2,6,23,0.9))] px-4 py-3 shadow-[0_12px_28px_rgba(2,6,23,0.35)] transition duration-300 hover:border-amber-300/30 hover:shadow-[0_16px_36px_rgba(2,6,23,0.5)]"
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
                 animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                whileHover={
+                  shouldReduceMotion ? undefined : { y: -3, scale: 1.015 }
+                }
+                whileTap={shouldReduceMotion ? undefined : { scale: 0.985 }}
                 transition={{
-                  duration: 0.45,
+                  type: "spring",
+                  stiffness: 180,
+                  damping: 18,
                   delay: 0.12 + index * 0.06,
-                  ease: [0.2, 0.8, 0.2, 1],
                 }}
               >
+                <span className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100">
+                  <span className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(251,191,36,0.14),transparent_55%)]" />
+                  <span className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-amber-300/40 to-transparent" />
+                </span>
                 <Image
                   src={sponsor.src}
                   alt={sponsor.alt}
                   width={sponsor.width}
                   height={sponsor.height}
-                  className="h-12 w-auto object-contain opacity-90"
+                  className="relative z-10 h-12 w-auto object-contain opacity-95 transition duration-300 group-hover:opacity-100 group-hover:drop-shadow-[0_6px_14px_rgba(0,0,0,0.45)]"
                 />
               </motion.div>
             ))}

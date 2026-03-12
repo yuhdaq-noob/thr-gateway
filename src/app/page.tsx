@@ -231,7 +231,7 @@ export default function GameGateway() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 font-sans text-slate-100 scroll-smooth">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 font-sans text-slate-100">
       <audio ref={audioRef} src="/ramadhan-sound.ogg" preload="auto" />
       <GameHeader />
 
@@ -259,6 +259,11 @@ export default function GameGateway() {
         <SectionReveal>
           <InfoSection />
         </SectionReveal>
+
+        <footer className="pt-4 text-center">
+          <p className="text-sm text-slate-300">Selamat Idul Fitri 1447 H 🌙</p>
+          <p className="mt-1 text-xs text-slate-500">© 2026 THR Gateway</p>
+        </footer>
       </main>
     </div>
   );
