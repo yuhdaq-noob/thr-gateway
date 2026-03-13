@@ -42,15 +42,15 @@ export function LoginForm({
           <Image
             src="/thr-gateway.png"
             alt="Logo THR Gateway"
-            width={300}
-            height={300}
-            className="mx-auto mb-4 h-16 w-auto object-contain sm:h-20"
+            width={520}
+            height={520}
+            className="mx-auto mb-6 h-32 w-auto object-contain sm:h-36"
             priority
           />
           <h1 className="text-4xl font-bold tracking-tight text-slate-100">
             THR Gateway
           </h1>
-          <p className="mt-2 text-sm text-slate-400">
+          <p className="mt-2 text-sm text-slate-300">
             Login untuk mengambil THR
           </p>
         </div>
@@ -73,7 +73,7 @@ export function LoginForm({
 
           <div className="space-y-5">
             <div>
-              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
+              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-300">
                 Nama Lengkap
               </label>
               <input
@@ -88,7 +88,7 @@ export function LoginForm({
               />
             </div>
             <div>
-              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
+              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-300">
                 Nomor DANA
               </label>
               <input
@@ -129,7 +129,7 @@ export function LoginForm({
         </form>
 
         <div className="mt-5 space-y-1 text-center select-none">
-          <p className="text-xs text-slate-400">Selamat Idul Fitri 1447 H 🌙</p>
+          <p className="text-xs text-slate-300">Selamat Idul Fitri 1447 H 🌙</p>
           <p className="text-[11px] text-slate-500">© 2026 THR Gateway</p>
         </div>
       </motion.div>

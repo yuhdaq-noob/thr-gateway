@@ -69,9 +69,9 @@ export function WelcomeHero({
               <Image
                 src="/thr-gateway.png"
                 alt="Logo THR Gateway"
-                width={300}
-                height={300}
-                className="mb-5 h-20 w-auto object-contain md:h-24"
+                width={520}
+                height={520}
+                className="mb-6 h-40 w-auto object-contain md:h-48"
                 priority
               />
               <p className="text-sm font-medium text-slate-300">
@@ -140,16 +140,16 @@ export function WelcomeHero({
           ></motion.div>
         </div>
 
-        <div className="mt-2 rounded-[1.75rem] border border-slate-800/80 bg-slate-950/60 p-4 shadow-[0_20px_40px_rgba(2,6,23,0.45)] md:p-5">
+        <div className="mt-2 rounded-[1.75rem] border border-slate-800/80 bg-slate-950/60 p-3 shadow-[0_20px_40px_rgba(2,6,23,0.45)] md:p-4">
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-amber-200">
-            Sponsored by
+            Disponsori oleh
           </p>
 
-          <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
+          <div className="mt-3 grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-4">
             {SPONSORS.map((sponsor, index) => (
               <motion.div
                 key={sponsor.src}
-                className="group relative flex min-h-20 items-center justify-center overflow-hidden rounded-2xl border border-slate-800/80 bg-[linear-gradient(180deg,rgba(15,23,42,0.82),rgba(2,6,23,0.9))] px-4 py-3 shadow-[0_12px_28px_rgba(2,6,23,0.35)] transition duration-300 hover:border-amber-300/30 hover:shadow-[0_16px_36px_rgba(2,6,23,0.5)]"
+                className="group relative flex min-h-14 items-center justify-center overflow-hidden rounded-2xl border border-slate-800/80 bg-[linear-gradient(180deg,rgba(15,23,42,0.82),rgba(2,6,23,0.9))] px-3 py-2 shadow-[0_12px_28px_rgba(2,6,23,0.35)] transition duration-300 hover:border-amber-300/30 hover:shadow-[0_16px_36px_rgba(2,6,23,0.5)]"
                 initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
                 animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
                 whileHover={
@@ -172,7 +172,7 @@ export function WelcomeHero({
                   alt={sponsor.alt}
                   width={sponsor.width}
                   height={sponsor.height}
-                  className="relative z-10 h-12 w-auto object-contain opacity-95 transition duration-300 group-hover:opacity-100 group-hover:drop-shadow-[0_6px_14px_rgba(0,0,0,0.45)]"
+                  className="relative z-10 h-9 w-auto object-contain opacity-95 transition duration-300 group-hover:opacity-100 group-hover:drop-shadow-[0_6px_14px_rgba(0,0,0,0.45)]"
                 />
               </motion.div>
             ))}

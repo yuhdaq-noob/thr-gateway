@@ -10,7 +10,7 @@ export async function executeSpin(phoneNumber: string) {
     .single();
 
   if (!user || user.spins_left <= 0) {
-    return { success: false, message: "Jatah spin Anda sudah habis!" };
+    return { success: false, message: "Jatah gatcha Anda sudah habis!" };
   }
 
   const riggedPrizes = [500, 1000, 1500];

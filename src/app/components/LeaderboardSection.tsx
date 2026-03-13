@@ -59,7 +59,7 @@ export function LeaderboardSection({ leaderboard }: LeaderboardSectionProps) {
                     >
                       {player.name}
                     </span>
-                    <span className="mt-0.5 block text-xs font-normal text-slate-400">
+                    <span className="mt-0.5 block text-xs font-normal text-slate-300">
                       Peserta #{idx + 1}
                     </span>
                   </span>

@@ -205,13 +205,31 @@ export default function GameGateway() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-slate-400">
-        <div className="mb-4 flex h-14 w-14 animate-pulse items-center justify-center rounded-2xl border border-amber-400/15 bg-amber-400/10">
-          <span className="h-3 w-3 rounded-sm bg-gradient-to-br from-amber-300 to-orange-400" />
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-slate-200">
+        <div className="relative overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-900/70 px-8 py-7 shadow-[0_20px_50px_rgba(2,6,23,0.45)] backdrop-blur">
+          <div className="pointer-events-none absolute -top-16 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-amber-400/10 blur-3xl" />
+          <div className="relative z-10 flex flex-col items-center gap-4">
+            <div className="relative">
+              <div className="absolute inset-0 rounded-2xl bg-amber-400/20 blur-xl" />
+              <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl border border-amber-300/30 bg-slate-950/70">
+                <span className="h-7 w-7 animate-spin rounded-full border-2 border-amber-300/80 border-t-transparent" />
+              </div>
+            </div>
+            <div className="text-center">
+              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-100">
+                Menyiapkan Portal Hadiah
+              </p>
+              <p className="mt-1 text-xs text-slate-300">
+                Menghubungkan akun kamu...
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-amber-300/80" />
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-amber-300/60 [animation-delay:120ms]" />
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-amber-300/40 [animation-delay:240ms]" />
+            </div>
+          </div>
         </div>
-        <p className="text-sm font-semibold tracking-widest uppercase">
-          Menyiapkan Portal Hadiah...
-        </p>
       </div>
     );
   }
@@ -233,7 +251,7 @@ export default function GameGateway() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 font-sans text-slate-100">
       <audio ref={audioRef} src="/ramadhan-sound.ogg" preload="auto" />
-      <GameHeader />
+      <GameHeader userName={user.name} />
 
       <main className="mx-auto max-w-5xl space-y-16 px-4 py-6 pb-20 md:px-6">
         <SectionReveal>
