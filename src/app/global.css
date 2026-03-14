@@ -2,15 +2,18 @@
 
 :root {
   color-scheme: dark;
-  --bg-primary: #020617;
-  --bg-secondary: #0f172a;
+  --bg-primary: #0f172a;
+  --bg-secondary: #0b1120;
+  --bg-tertiary: #020617;
   --surface-soft: rgba(15, 23, 42, 0.72);
   --surface-strong: rgba(15, 23, 42, 0.92);
   --border-soft: rgba(148, 163, 184, 0.14);
   --text-secondary: #cbd5e1;
   --text-muted: #94a3b8;
-  --accent-primary: #fbbf24;
-  --accent-secondary: #fb923c;
+  --accent-primary: #facc15;
+  --accent-secondary: #eab308;
+  --accent-deep: #ca8a04;
+  --accent-gradient-end: #d4a017;
   --success: #34d399;
 }
 
@@ -20,12 +23,80 @@
   }
 
   body {
+    position: relative;
+    min-height: 100vh;
+    isolation: isolate;
     background:
-      radial-gradient(circle at top, rgba(251, 191, 36, 0.08), transparent 28%),
-      linear-gradient(180deg, var(--bg-secondary), var(--bg-primary));
+      radial-gradient(
+        circle at center top,
+        rgba(255, 215, 130, 0.15),
+        transparent 60%
+      ),
+      linear-gradient(
+        180deg,
+        var(--bg-tertiary) 0%,
+        var(--bg-secondary) 48%,
+        var(--bg-primary) 100%
+      );
     color: #f1f5f9;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  body::before {
+    z-index: -2;
+    background-image:
+      linear-gradient(
+        45deg,
+        transparent 48%,
+        rgba(250, 204, 21, 0.42) 49%,
+        rgba(250, 204, 21, 0.42) 51%,
+        transparent 52%
+      ),
+      linear-gradient(
+        -45deg,
+        transparent 48%,
+        rgba(250, 204, 21, 0.42) 49%,
+        rgba(250, 204, 21, 0.42) 51%,
+        transparent 52%
+      ),
+      radial-gradient(
+        circle at 50% 50%,
+        rgba(250, 204, 21, 0.32) 0,
+        rgba(250, 204, 21, 0.32) 1.6px,
+        transparent 1.7px
+      );
+    background-size:
+      84px 84px,
+      84px 84px,
+      42px 42px;
+    background-position:
+      0 0,
+      0 0,
+      21px 21px;
+    opacity: 0.04;
+  }
+
+  body::after {
+    z-index: -1;
+    background-image: repeating-radial-gradient(
+      circle at 0 0,
+      rgba(255, 255, 255, 0.26) 0,
+      rgba(255, 255, 255, 0.26) 0.6px,
+      transparent 1.2px,
+      transparent 2.4px
+    );
+    background-size: 3px 3px;
+    mix-blend-mode: soft-light;
+    opacity: 0.03;
   }
 
   * {
@@ -33,7 +104,7 @@
   }
 
   ::selection {
-    background: rgba(251, 191, 36, 0.28);
+    background: rgba(250, 204, 21, 0.28);
     color: #fff7ed;
   }
 }
@@ -51,7 +122,7 @@ a:focus-visible,
 button:focus-visible,
 input:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.25);
+  box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.25);
 }
 
 @media (prefers-reduced-motion: reduce) {

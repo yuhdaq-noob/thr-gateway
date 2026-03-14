@@ -28,7 +28,7 @@ export function InfoSection() {
             Metode transfer
           </p>
           <p className="mt-3 text-sm leading-6 text-slate-100">
-            Hadiah dikirim ke akun <strong>DANA</strong> yang didaftarkan saat Login pada waktu yang ditentukan oleh <strong>Mas Admin Yang Terhormat</strong>.
+            Sistem akan mengirim hadiah ke akun <strong>DANA/ShopeePay</strong> yang didaftarkan saat Login pada waktu yang ditentukan oleh <strong>Mas Admin Yang Terhormat</strong>.
           </p>
         </div>
       </div>

@@ -60,8 +60,8 @@ export function LoginForm({
           className="w-full rounded-3xl border border-slate-800 bg-slate-900/72 p-7 backdrop-blur"
         >
           <div className="mb-5 rounded-2xl border border-slate-800 bg-slate-950/55 px-4 py-3 text-sm leading-6 text-slate-300">
-            NB: Nomor DANA digunakan hanya untuk pencairan hadiah sesuai
-            kehendak <strong>Mas Admin Yang Terhormat</strong>
+            NB: Nomor DANA/ShopeePay digunakan hanya untuk pencairan hadiah
+            sesuai kehendak <strong>Mas Admin Yang Terhormat</strong>
           </div>
 
           {loginError && (
@@ -89,7 +89,7 @@ export function LoginForm({
             </div>
             <div>
               <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-300">
-                Nomor DANA
+                Nomor DANA/ShopeePay
               </label>
               <input
                 type="text"
@@ -110,7 +110,7 @@ export function LoginForm({
             <motion.button
               type="submit"
               disabled={isSubmitting}
-              className="mt-1 w-full rounded-xl bg-gradient-to-r from-amber-300 via-amber-200 to-yellow-200 py-3.5 text-base font-bold tracking-wide text-slate-950 shadow-[0_12px_24px_rgba(251,191,36,0.35)] hover:from-amber-200 hover:via-amber-100 hover:to-yellow-100 hover:shadow-[0_16px_30px_rgba(251,191,36,0.45)] active:translate-y-0.5 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400 disabled:shadow-none"
+              className="mt-1 w-full rounded-xl bg-gradient-to-r from-[#facc15] to-[#d4a017] py-3.5 text-base font-bold tracking-wide text-slate-950 shadow-[0_12px_24px_rgba(234,179,8,0.35)] hover:from-[#eab308] hover:to-[#ca8a04] hover:shadow-[0_16px_30px_rgba(234,179,8,0.45)] active:translate-y-0.5 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400 disabled:shadow-none"
               whileHover={
                 shouldReduceMotion || isSubmitting
                   ? undefined

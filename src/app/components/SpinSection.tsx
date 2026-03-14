@@ -52,15 +52,15 @@ export function SpinSection({
           <div>
             <div className="mt-4 max-w-xl">
               <h2 className="text-3xl font-bold tracking-tight text-slate-100 md:text-4xl">
-                Semoga Beruntung,{" "}
-                <span className="text-amber-400">{user.name}</span>.
+                Semoga Beruntung,
+                <br /> <span className="text-amber-400">{user.name}</span>.
               </h2>
             </div>
 
             <div className="mt-5 grid grid-cols-2 gap-2 sm:gap-3 lg:max-w-xl">
               <div className="rounded-2xl border border-slate-700/70 bg-slate-950/60 px-3 py-3 sm:px-4 sm:py-4">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-300 sm:text-[11px]">
-                  Sisa putaran
+                  Sisa Gatcha
                 </p>
                 <p className="mt-1 text-lg font-bold leading-tight text-amber-300 sm:text-2xl tabular-nums">
                   {user.spins_left}
@@ -91,7 +91,7 @@ export function SpinSection({
                   className="w-full rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-4 text-left"
                 >
                   <p className="text-sm font-semibold text-emerald-300">
-                    Hasil putaran terbaru
+                    Hasil Gatcha terbaru
                   </p>
                   <p className="mt-1 text-2xl font-bold text-white">
                     Rp {spinResult.toLocaleString("id-ID")}
@@ -286,12 +286,12 @@ export function SpinSection({
             <button
               onClick={onSpin}
               disabled={isSpinning || user.spins_left <= 0}
-              className="w-full rounded-full bg-gradient-to-r from-amber-300 via-amber-200 to-yellow-200 px-8 py-4 text-base font-bold text-slate-950 shadow-[0_14px_30px_rgba(251,191,36,0.35)] hover:from-amber-200 hover:via-amber-100 hover:to-yellow-100 hover:shadow-[0_18px_38px_rgba(251,191,36,0.45)] active:translate-y-0.5 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400 disabled:shadow-none"
+              className="w-full rounded-full bg-gradient-to-r from-[#facc15] to-[#d4a017] px-8 py-4 text-base font-bold text-slate-950 shadow-[0_14px_30px_rgba(234,179,8,0.35)] hover:from-[#eab308] hover:to-[#ca8a04] hover:shadow-[0_18px_38px_rgba(234,179,8,0.45)] active:translate-y-0.5 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400 disabled:shadow-none"
             >
               {isSpinning
-                ? "Sedang Memutar..."
+                ? "Sedang Menghitung Dosa..."
                 : user.spins_left > 0
-                  ? "Putar Sekarang"
+                  ? "Gatcha Sekarang"
                   : "Kesempatan Habis"}
             </button>
           </div>

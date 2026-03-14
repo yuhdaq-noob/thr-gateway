@@ -48,7 +48,7 @@ export function WelcomeHero({
 
   return (
     <section id="sambutan" className="scroll-mt-28 sm:scroll-mt-24">
-      <div className="relative overflow-hidden rounded-[2rem] border border-slate-800 bg-[radial-gradient(circle_at_top,rgba(251,191,36,0.14),transparent_34%),linear-gradient(180deg,rgba(15,23,42,0.9),rgba(2,6,23,0.96))] p-6 md:p-8">
+      <div className="relative overflow-hidden rounded-[2rem] border border-slate-800 bg-[radial-gradient(circle_at_center_top,rgba(255,215,130,0.15),transparent_60%),linear-gradient(180deg,rgba(15,23,42,0.9),rgba(2,6,23,0.96))] p-6 md:p-8">
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-300/40 to-transparent" />
         <div className="absolute -top-20 right-[-4rem] h-56 w-56 rounded-full bg-amber-400/10 blur-3xl" />
 
@@ -74,18 +74,18 @@ export function WelcomeHero({
                 className="mb-6 h-40 w-auto object-contain md:h-48"
                 priority
               />
-              <p className="text-sm font-medium text-slate-300">
+              <p className="text-sm font-medium text-slate-400">
                 Selamat datang, {user.name}
               </p>
-              <h1 className="mt-3 max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-slate-50 md:text-5xl md:leading-[1.05]">
-                Ramadhan Mubarak, Menuju Hari Kemenangan
+              <h1 className="mt-3 max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-slate-100 md:text-5xl md:leading-[1.05]">
+                Hilal THR Sudah Terlihat! <br /> Amankan Jatahmu.
               </h1>
             </div>
 
             <div className="mt-7 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               <motion.a
                 href="#spin"
-                className="rounded-full bg-gradient-to-r from-amber-300 via-amber-200 to-yellow-200 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_12px_24px_rgba(251,191,36,0.35)] hover:from-amber-200 hover:via-amber-100 hover:to-yellow-100 hover:shadow-[0_16px_30px_rgba(251,191,36,0.45)] active:translate-y-0.5"
+                className="rounded-full bg-gradient-to-r from-[#facc15] to-[#d4a017] px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_12px_24px_rgba(234,179,8,0.35)] hover:from-[#eab308] hover:to-[#ca8a04] hover:shadow-[0_16px_30px_rgba(234,179,8,0.45)] active:translate-y-0.5"
                 whileHover={
                   shouldReduceMotion ? undefined : { y: -2, scale: 1.02 }
                 }

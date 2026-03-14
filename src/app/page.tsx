@@ -220,7 +220,7 @@ export default function GameGateway() {
                 Menyiapkan Portal Hadiah
               </p>
               <p className="mt-1 text-xs text-slate-300">
-                Menghubungkan akun kamu...
+                Menghitung <strong>dosa</strong> kamu...
               </p>
             </div>
             <div className="flex items-center gap-2">
@@ -249,7 +249,7 @@ export default function GameGateway() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 font-sans text-slate-100">
+    <div className="min-h-screen bg-transparent font-sans text-slate-100">
       <audio ref={audioRef} src="/ramadhan-sound.ogg" preload="auto" />
       <GameHeader userName={user.name} />
 
@@ -279,7 +279,10 @@ export default function GameGateway() {
         </SectionReveal>
 
         <footer className="pt-4 text-center">
-          <p className="text-sm text-slate-300">Selamat Idul Fitri 1447 H 🌙</p>
+          <p className="text-sm text-slate-300">
+            Kami, Yuhda sekeluarga mengucapkan <br />
+            <strong>Selamat Idul Fitri 1447 H 🌙</strong>
+          </p>
           <p className="mt-1 text-xs text-slate-500">© 2026 THR Gateway</p>
         </footer>
       </main>
