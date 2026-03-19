@@ -13,9 +13,6 @@ export function LeaderboardSection({ leaderboard }: LeaderboardSectionProps) {
       className="scroll-mt-28 pt-8 sm:scroll-mt-24 md:pt-10"
     >
       <div className="mb-7 max-w-2xl">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-200/85">
-          Papan Peringkat
-        </p>
         <h3 className="mt-3 text-3xl font-bold tracking-tight text-slate-100">
           Top Global THR 👑
         </h3>

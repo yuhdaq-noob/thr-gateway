@@ -5,9 +5,6 @@ export function InfoSection() {
       className="scroll-mt-28 pt-8 pb-24 sm:scroll-mt-24 md:pt-10"
     >
       <div className="mb-7 max-w-2xl">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-200/85">
-          Ringkasan Aturan
-        </p>
         <h3 className="mt-3 text-3xl font-bold tracking-tight text-slate-100 max-[390px]:text-[1.65rem]">
           Informasi Ketentuan
         </h3>
