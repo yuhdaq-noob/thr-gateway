@@ -6,23 +6,34 @@ import Image from "next/image";
 type LoginFormProps = {
   inputName: string;
   inputPhone: string;
+  inputWallet: string;
   isSubmitting: boolean;
   loginError: string;
   onNameChange: (value: string) => void;
   onPhoneChange: (value: string) => void;
+  onWalletChange: (value: string) => void;
   onSubmit: (e: React.FormEvent) => Promise<void>;
 };
 
 export function LoginForm({
   inputName,
   inputPhone,
+  inputWallet,
   isSubmitting,
   loginError,
   onNameChange,
   onPhoneChange,
+  onWalletChange,
   onSubmit,
 }: LoginFormProps) {
   const shouldReduceMotion = useReducedMotion();
+  const selectedWalletLabel =
+    inputWallet === "DANA"
+      ? "DANA"
+      : inputWallet === "SHOPEEPAY"
+        ? "ShopeePay"
+        : "Belum dipilih";
+  const hasWalletSelection = Boolean(inputWallet);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 p-4 font-sans text-slate-100">
@@ -104,8 +115,61 @@ export function LoginForm({
                 className="w-full rounded-xl border border-slate-700 bg-slate-950/70 px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:border-amber-300 focus:outline-none"
                 placeholder="08123456789"
               />
-              <br />
-              <br />
+            </div>
+            <div>
+              <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+                <label
+                  htmlFor="wallet"
+                  className="text-xs font-semibold uppercase tracking-wider text-slate-300"
+                >
+                  Tujuan THR
+                </label>
+                <span
+                  className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold leading-none ${
+                    hasWalletSelection
+                      ? "border-amber-300/45 bg-amber-300/10 text-amber-200"
+                      : "border-slate-700 bg-slate-900 text-slate-400"
+                  }`}
+                >
+                  {selectedWalletLabel}
+                </span>
+              </div>
+              <div className="relative">
+                <select
+                  id="wallet"
+                  name="wallet"
+                  required
+                  disabled={isSubmitting}
+                  value={inputWallet}
+                  onChange={(e) => onWalletChange(e.target.value)}
+                  className="w-full appearance-none rounded-xl border border-slate-700 bg-slate-950/70 px-4 py-3 pr-11 text-sm text-slate-100 transition focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-300/25 disabled:cursor-not-allowed disabled:border-slate-800 disabled:text-slate-500"
+                >
+                  <option value="" disabled>
+                    Pilih Tujuan THR...
+                  </option>
+                  <option value="DANA">DANA</option>
+                  <option value="SHOPEEPAY">ShopeePay</option>
+                </select>
+                <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-slate-400">
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    className="h-4 w-4"
+                  >
+                    <path
+                      d="M5 7.5L10 12.5L15 7.5"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <p className="mt-2 text-[11px] leading-relaxed text-slate-500">
+                Pilihan ini digunakan untuk proses pencairan hadiah.
+              </p>
             </div>
             <motion.button
               type="submit"

@@ -2,7 +2,11 @@
 
 import { supabaseAdmin } from "@/lib/supabase";
 
-export async function loginUser(name: string, phoneNumber: string) {
+export async function loginUser(
+  name: string,
+  phoneNumber: string,
+  walletType?: string,
+) {
   const { data: existingUser } = await supabaseAdmin
     .from("thr_hunters")
     .select("*")
@@ -14,6 +18,13 @@ export async function loginUser(name: string, phoneNumber: string) {
       success: true,
       user: existingUser,
       message: "Login kembali berhasil.",
+    };
+  }
+
+  if (!walletType) {
+    return {
+      success: false,
+      message: "Pilih tujuan pencairan THR terlebih dahulu.",
     };
   }
 
@@ -30,7 +41,13 @@ export async function loginUser(name: string, phoneNumber: string) {
 
   const { data: newUser, error } = await supabaseAdmin
     .from("thr_hunters")
-    .insert([{ phone_number: phoneNumber, name: name }])
+    .insert([
+      {
+        phone_number: phoneNumber,
+        name: name,
+        wallet_type: walletType,
+      },
+    ])
     .select()
     .single();
 

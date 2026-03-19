@@ -13,12 +13,16 @@ export function LeaderboardSection({ leaderboard }: LeaderboardSectionProps) {
       className="scroll-mt-28 pt-8 sm:scroll-mt-24 md:pt-10"
     >
       <div className="mb-7 max-w-2xl">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-200/85">
+          Papan Peringkat
+        </p>
         <h3 className="mt-3 text-3xl font-bold tracking-tight text-slate-100">
           Top Global THR 👑
         </h3>
       </div>
 
-      <div className="rounded-3xl border border-slate-800/80 bg-slate-900/70 p-6 shadow-[0_18px_40px_rgba(2,6,23,0.45)]">
+      <div className="relative overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-900/70 p-6 shadow-[0_18px_40px_rgba(2,6,23,0.45)]">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-300/35 to-transparent" />
         {leaderboard.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-slate-700/70 bg-slate-950/50 px-6 py-10 text-center text-slate-300">
             Belum ada peserta yang tercatat di klasemen.

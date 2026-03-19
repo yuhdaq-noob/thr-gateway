@@ -28,6 +28,7 @@ export default function GameGateway() {
 
   const [inputName, setInputName] = useState("");
   const [inputPhone, setInputPhone] = useState("");
+  const [inputWallet, setInputWallet] = useState("");
   const [loginError, setLoginError] = useState("");
 
   const fetchLeaderboard = useCallback(async () => {
@@ -127,11 +128,16 @@ export default function GameGateway() {
   const handleLogin = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
+      if (!inputWallet) {
+        setLoginError("Pilih tujuan pencairan THR terlebih dahulu.");
+        return;
+      }
+
       setIsAuthenticating(true);
       setLoginError("");
 
       try {
-        const res = await loginUser(inputName, inputPhone);
+        const res = await loginUser(inputName, inputPhone, inputWallet);
 
         if (res.success && res.user) {
           localStorage.setItem("thr_user_phone", res.user.phone_number);
@@ -149,7 +155,7 @@ export default function GameGateway() {
         setIsAuthenticating(false);
       }
     },
-    [fetchLeaderboard, inputName, inputPhone],
+    [fetchLeaderboard, inputName, inputPhone, inputWallet],
   );
 
   useEffect(() => {
@@ -239,10 +245,12 @@ export default function GameGateway() {
       <LoginForm
         inputName={inputName}
         inputPhone={inputPhone}
+        inputWallet={inputWallet}
         isSubmitting={isAuthenticating}
         loginError={loginError}
         onNameChange={setInputName}
         onPhoneChange={setInputPhone}
+        onWalletChange={setInputWallet}
         onSubmit={handleLogin}
       />
     );
