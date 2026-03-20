@@ -43,7 +43,7 @@ export async function getLeaderboard() {
     .from("thr_hunters")
     .select("name, total_prize")
     .order("total_prize", { ascending: false })
-    .limit(20);
+    .limit(25);
 
   if (error) throw new Error(error.message);
   return data;
