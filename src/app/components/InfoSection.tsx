@@ -19,7 +19,7 @@ export function InfoSection() {
           </p>
           <p className="mt-3 text-sm leading-6 text-slate-300">
             Sistem akan ditutup saat kuota{" "}
-            <span className="font-semibold text-slate-200">20 peserta</span>{" "}
+            <span className="font-semibold text-slate-200">25 peserta</span>{" "}
             terpenuhi atau pada batas waktu yang telah ditentukan oleh{" "}
             <strong> Mas Admin Yang Terhormat.</strong>
           </p>
